@@ -17,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
     Tab3PageRoutingModule,
     SharedModule,
   ],
+  exports: [Tab3Page],
   declarations: [Tab3Page]
 })
 export class Tab3PageModule {}

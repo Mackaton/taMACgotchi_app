@@ -4,17 +4,18 @@ import { NgModule } from '@angular/core';
 /*Components */
 
 import { HeaderComponent } from './header/header.component';
-import { CommonModule } from '@angular/common';
+import { MenuComponent } from './menu/menu.component';
+
 @NgModule({
   imports: [
-      CommonModule
 ],
 declarations: [
-    HeaderComponent,    
+    HeaderComponent, 
+    MenuComponent,   
   ],
   exports: [
     HeaderComponent,
-    CommonModule,
+    MenuComponent,
   ],
 })
 export class SharedModule {}

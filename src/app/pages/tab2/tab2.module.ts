@@ -17,5 +17,6 @@ import { SharedModule } from '../../shared/shared.module';
     SharedModule,
   ],
   declarations: [Tab2Page],
+  exports: [Tab2Page],
 })
 export class Tab2PageModule {}

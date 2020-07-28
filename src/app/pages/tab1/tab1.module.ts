@@ -15,5 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
   ],
   declarations: [Tab1Page],
+  exports: [Tab1Page],
+
 })
 export class Tab1PageModule {}

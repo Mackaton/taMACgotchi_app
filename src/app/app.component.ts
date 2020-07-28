@@ -10,6 +10,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  
+  displayStateStatus = 'hide';
+  userNameStatus = '';
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -17,6 +20,14 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+
+  onChangeState(value) {
+    console.log('aaaa')
+    this.displayStateStatus = 'show';
+    this.userNameStatus = value.userName;
+  }
+
+  
 
   initializeApp() {
     this.platform.ready().then(() => {
