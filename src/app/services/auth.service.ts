@@ -43,6 +43,10 @@ export class AuthService {
         localStorage.setItem('currentUser', JSON.stringify(token));
     }
 
+    getTokenAuthenticated(){
+        return JSON.parse(localStorage.getItem('currentUser'));
+    }
+
     saveUserPersonalInfo(user){
         localStorage.setItem('userPersonalInfo', JSON.stringify(user));
     }

@@ -112,7 +112,7 @@
   <ion-content>
     <div class="container h-100 d-flex align-items-center justify-content-center">
       <div>
-        <form [formGroup]="userForm" (ngSubmit)="register()">
+        <form [formGroup]="userForm">
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Nombre</ion-label>
             <ion-input type="text" class="text-white" formControlName="first_name" class="text-white"></ion-input>
@@ -147,9 +147,10 @@
           </div>
           <div class="d-flex justify-content-center">
             <ion-button class="mt-5 button-2" (click)="continueToStep(1)">Volver</ion-button>
-            <ion-button type="submit" class="mt-5 button-2"
+            <ion-button class="mt-5 button-2"
             [disabled]="!userForm.get('first_name').valid || !userForm.get('lastname').valid
             || !userForm.get('birthdate').valid || !userForm.get('gender').valid"
+            (click)="continueToStep(3)"
             >Continuar</ion-button>
           </div>
         </form>
@@ -162,3 +163,40 @@
   </ion-content>
 </ion-app>
 <!---------------------->
+
+<!--Register Step 3-->
+<ion-app *ngIf="registerStep==3">
+  <ion-header>
+    <ion-toolbar class="bg-transparent">
+      <ion-title>Datos personales</ion-title >
+    </ion-toolbar>
+  </ion-header>
+  
+  
+    <ion-content>
+      <div class="container h-100 d-flex align-items-center justify-content-center">
+        <div>
+          <form [formGroup]="userForm" (ngSubmit)="register()">
+            <ion-item class="bg-transparent">
+              <ion-label class="text-white" position="floating">Usuario</ion-label>
+              <ion-input type="text" class="text-white" formControlName="username" class="text-white"></ion-input>
+            </ion-item>
+            <div *ngIf="userForm.get('username').touched && !userForm.get('first_name').value">
+              <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+            </div>
+            <div class="d-flex justify-content-center">
+              <ion-button class="mt-5 button-2" (click)="continueToStep(2)">Volver</ion-button>
+              <ion-button type="submit" class="mt-5 button-2"
+              [disabled]="!userForm.get('username').valid"
+              >Continuar</ion-button>
+            </div>
+          </form>
+          <div *ngIf="registerError">
+            {{registerError}}
+          </div>
+        </div>
+      </div>
+      
+    </ion-content>
+  </ion-app>
+  <!---------------------->
