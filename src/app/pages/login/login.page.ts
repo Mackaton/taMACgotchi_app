@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
     public router: Router,
     public formBuilder: FormBuilder,
     public _authService: AuthService,
+    public _loadingService: LoadingService,
   ) { }
 
   ngOnInit() {
@@ -26,15 +28,21 @@ export class LoginPage implements OnInit {
   }
 
   async login(){
-    this._authService.login(this.userForm).then((data:any)=>{
-      if (data){
-        if (data.additionalUserInfo){
-          localStorage.setItem('currentUser', JSON.stringify(data));
-          this.router.navigate(['']);
+    this._loadingService.presentLoading('Iniciando sesion').then((loading)=>{
+      this._authService.login(this.userForm).then((data:any)=>{
+        this._loadingService.stopLoading(loading)
+        if (data){
+          if (data.additionalUserInfo){
+            localStorage.setItem('currentUser', JSON.stringify(data));
+            this.router.navigate(['']);
+          }else{
+            this.loginError = data.message
+            this._loadingService.stopLoading(loading)
+          }
         }else{
-          this.loginError = data.message
+          this._loadingService.stopLoading(loading)
         }
-      }
+      })
     })
 }
 

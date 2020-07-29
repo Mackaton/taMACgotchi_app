@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FormGroup } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
+import { ToastService } from './toast.service';
 
 
 @Injectable({
@@ -19,22 +20,13 @@ export class AuthService {
         public http: HttpClient,
         public router: Router,
         public _authFireAuth:AngularFireAuth,
-        public toastController:ToastController,
+        public _toastService:ToastService,
         ) {
             _authFireAuth.authState.subscribe(user=>{
                 this.isLogged = user
             })
         }
 
-
-    async presentToast(message:string) {
-        const toast = await this.toastController.create({
-          message: message,
-          duration: 2000,
-          position: 'top',
-        });
-        toast.present();
-      }
 
     isAuthenticated(){
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -58,7 +50,7 @@ export class AuthService {
     async login(user:any){
         return await this._authFireAuth.signInWithEmailAndPassword(user.get('email').value,user.get('password').value)
         .catch(err=>{
-            this.presentToast(err)
+            this._toastService.presentToast(err)
         });
 
     }
@@ -66,7 +58,7 @@ export class AuthService {
     async register(user:FormGroup){
         return await this._authFireAuth.createUserWithEmailAndPassword(user.get('email').value,user.get('password').value)
         .catch(err=>{
-            this.presentToast(err)
+            this._toastService.presentToast(err)
         })
     }
 

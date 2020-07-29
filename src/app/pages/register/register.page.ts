@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -16,6 +17,7 @@ export class RegisterPage implements OnInit {
     public router: Router,
     public formBuilder: FormBuilder,
     public _authService: AuthService,
+    public _loadingService: LoadingService,
   ){}
 
   async ngOnInit() {
@@ -36,9 +38,11 @@ export class RegisterPage implements OnInit {
   }
 
   async register(){
+    this._loadingService.presentLoading('Registrando').then((loading)=>{
       this._authService.register(this.userForm).then((data:any)=>{
         if (data){
           if (data.additionalUserInfo){
+            this._loadingService.stopLoading(loading)
             this._authService.saveTokenAuthenticated(data);
             this._authService.saveUserPersonalInfo(this.userForm.value)
             this.registerStep = 0;
@@ -46,8 +50,12 @@ export class RegisterPage implements OnInit {
             this.router.navigate(['initial-test']);
           }else{
             this.registerError = data.message
+            this._loadingService.stopLoading(loading)
           }
+        }else{
+          this._loadingService.stopLoading(loading)
         }
       })
+    })
   }
 }
