@@ -4,8 +4,8 @@ import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: 'welcome',
-    loadChildren: () => import('./pages/welcome/welcome-routing.module').then(m => m.WelcomeRoutingModule),
+    path: 'register',
+    loadChildren: () => import('./pages/register/register-routing.module').then(m => m.RegisterRoutingModule),
   },
   {
     path: '',

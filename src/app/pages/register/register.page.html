@@ -1,0 +1,24 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Registro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <form [formGroup]="userForm" (ngSubmit)="register()">
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-button type="submit">Test</ion-button>
+  </form>
+  <div *ngIf="registerError">
+    {{registerError}}
+  </div>
+  </ion-content>
+</ion-app>

@@ -2,14 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { FormGroup } from '@angular/forms';
+import { catchError } from 'rxjs/operators';
+import { ToastController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+    isLogged:any = false;
 
-    constructor(private http: HttpClient, public router: Router) {}
+    constructor(
+        public http: HttpClient,
+        public router: Router,
+        public _authFireAuth:AngularFireAuth,
+        public toastController:ToastController,
+        ) {
+            _authFireAuth.authState.subscribe(user=>{
+                this.isLogged = user
+            })
+        }
 
     isAuthenticated(){
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -22,6 +37,32 @@ export class AuthService {
 
     }
 
+    async login(user:any){
+        try{
+            return await this._authFireAuth.signInWithEmailAndPassword(user.email,user.password);
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    async presentToast(message:string) {
+        const toast = await this.toastController.create({
+          message: message,
+          duration: 2000
+        });
+        toast.present();
+      }
+
+    async register(user:FormGroup){
+        return await this._authFireAuth.createUserWithEmailAndPassword(user.get('email').value,user.get('password').value)
+        .catch(err=>{
+            this.presentToast(err)
+        })
+    }
+
+    
+
+
     getCurrentUser() {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       console.log(currentUser)
@@ -29,7 +70,7 @@ export class AuthService {
     }
 
     logout(){
-        this.router.navigate(['welcome']);
+        this.router.navigate(['register']);
         localStorage.removeItem('currentUser');
     }
 }

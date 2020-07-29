@@ -9,10 +9,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { WelcomeModule } from './pages/welcome/welcome.module';
+import { RegisterModule } from './pages/register/register.module';
 import { AuthGuardService } from './services/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth'; 
+import { environment } from 'src/environments/environment';
 /*Services*/
 const Services = [AuthGuardService,]
 
@@ -22,7 +24,8 @@ const Services = [AuthGuardService,]
   entryComponents: [],
   imports: [
     BrowserModule, IonicModule.forRoot(), AppRoutingModule, SharedModule,
-    WelcomeModule, HttpClientModule,
+    RegisterModule, HttpClientModule, AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
     StatusBar,
