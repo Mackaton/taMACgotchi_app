@@ -13,11 +13,18 @@
           <ion-label class="text-white" position="floating">Email</ion-label>
           <ion-input type="email" class="text-white" formControlName="email"></ion-input>
         </ion-item>
+        <div *ngIf="userForm.get('email').touched && !userForm.get('email').value">
+          <p class="form-error text-warning ml-3"><small>Ingresa tu email</small></p> 
+        </div>
         <ion-item class="bg-transparent">
           <ion-label class="text-white" position="floating">Password</ion-label>
           <ion-input type="password" class="text-white" formControlName="password"></ion-input>
         </ion-item>
-        <ion-button type="submit" class="mt-5 button-1">Iniciar Sesion</ion-button>
+        <div *ngIf="userForm.get('password').touched && !userForm.get('password').value">
+          <p class="form-error text-warning ml-3"><small>Ingresa tu contraseña</small></p> 
+        </div>
+        <ion-button type="submit" class="mt-5 button-1" 
+        [disabled]="!userForm.get('email').valid || !userForm.get('password').valid">Iniciar Sesion</ion-button>
       </form>
       <div class="mt-5 d-flex justify-content-center">
         <a class="text-white" [routerLink]="['/register']">
