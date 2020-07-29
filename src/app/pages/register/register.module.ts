@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterRoutingModule } from './register-routing.module';
-import { PersonalFormPageModule } from './child-pages/personal-form/personal-form.module';
+import { InitialTestPageModule } from './child-pages/initial-test/initial-test.module';
 @NgModule({
   imports: [
       IonicModule,
@@ -16,7 +16,7 @@ import { PersonalFormPageModule } from './child-pages/personal-form/personal-for
       FormsModule,
       ReactiveFormsModule,
       RegisterRoutingModule,
-      PersonalFormPageModule,
+      InitialTestPageModule,
 ],
 declarations: [
     RegisterPage,    

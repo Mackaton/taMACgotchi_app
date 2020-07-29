@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PersonalFormPageRoutingModule } from './personal-form-routing.module';
+import { InitialTestPageRoutingModule } from './initial-test-routing.module';
 
-import { PersonalFormPage } from './personal-form.page';
+import { InitialTestPage } from './initial-test.page';
 
 @NgModule({
   imports: [
@@ -14,9 +14,9 @@ import { PersonalFormPage } from './personal-form.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    PersonalFormPageRoutingModule
+    InitialTestPageRoutingModule,
   ],
-  declarations: [PersonalFormPage],
-  exports: [PersonalFormPage]
+  declarations: [InitialTestPage],
+  exports: [InitialTestPage]
 })
-export class PersonalFormPageModule {}
+export class InitialTestPageModule {}

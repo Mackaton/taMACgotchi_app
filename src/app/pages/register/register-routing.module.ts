@@ -8,8 +8,8 @@ const routes: Routes = [
     component: RegisterPage,
   },
   {
-    path: 'personal-form',
-    loadChildren: () => import('./child-pages/personal-form/personal-form.module').then( m => m.PersonalFormPageModule)
+    path: 'initial-test',
+    loadChildren: () => import('./child-pages/initial-test/initial-test.module').then( m => m.InitialTestPageModule)
   }
 ];
 

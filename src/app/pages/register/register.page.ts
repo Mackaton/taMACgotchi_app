@@ -39,12 +39,11 @@ export class RegisterPage implements OnInit {
       this._authService.register(this.userForm).then((data:any)=>{
         if (data){
           if (data.additionalUserInfo){
-            localStorage.setItem('currentUser', JSON.stringify(data));
-            console.log(this.userForm.value)
-            localStorage.setItem('userPersonalInfo', JSON.stringify(this.userForm.value));
+            this._authService.saveTokenAuthenticated(data);
+            this._authService.saveUserPersonalInfo(this.userForm.value)
             this.registerStep = 0;
             this.userForm.reset();
-            this.router.navigate(['']);
+            this.router.navigate(['initial-test']);
           }else{
             this.registerError = data.message
           }
