@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { TabsPage } from './tabs.page';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
+    SharedModule,
   ],
   declarations: [TabsPage],
   exports: [TabsPage]
