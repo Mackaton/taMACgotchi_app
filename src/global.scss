@@ -10,6 +10,9 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
+
+
+
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -24,3 +27,27 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.bg-transparent{
+    --ion-background-color: transparent;
+}
+
+ion-app{
+    --ion-background-color: linear-gradient(#37A134, #19370F);
+}
+
+.text-white{
+    --color: white  !important;
+}
+
+.button-1{
+    --background: #6A958A;
+    --border-radius: 25px;
+    --width: 270px;
+    --height: 45px;
+    --padding-start: 100px;
+    --padding-end: 100px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}

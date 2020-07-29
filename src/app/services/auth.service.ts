@@ -26,6 +26,16 @@ export class AuthService {
             })
         }
 
+
+    async presentToast(message:string) {
+        const toast = await this.toastController.create({
+          message: message,
+          duration: 2000,
+          position: 'top',
+        });
+        toast.present();
+      }
+
     isAuthenticated(){
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser){
@@ -38,20 +48,12 @@ export class AuthService {
     }
 
     async login(user:any){
-        try{
-            return await this._authFireAuth.signInWithEmailAndPassword(user.email,user.password);
-        }catch(error){
-            console.log(error)
-        }
-    }
-
-    async presentToast(message:string) {
-        const toast = await this.toastController.create({
-          message: message,
-          duration: 2000
+        return await this._authFireAuth.signInWithEmailAndPassword(user.get('email').value,user.get('password').value)
+        .catch(err=>{
+            this.presentToast(err)
         });
-        toast.present();
-      }
+
+    }
 
     async register(user:FormGroup){
         return await this._authFireAuth.createUserWithEmailAndPassword(user.get('email').value,user.get('password').value)

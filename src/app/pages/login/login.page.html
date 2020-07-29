@@ -1,0 +1,34 @@
+<ion-app >
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="container h-100 d-flex align-items-center justify-content-center">
+      <div>
+        <form [formGroup]="userForm" (ngSubmit)="login()">
+        <ion-item class="bg-transparent">
+          <ion-label class="text-white" position="floating">Email</ion-label>
+          <ion-input type="email" class="text-white" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item class="bg-transparent">
+          <ion-label class="text-white" position="floating">Password</ion-label>
+          <ion-input type="password" class="text-white" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-button type="submit" class="mt-5 button-1">Iniciar Sesion</ion-button>
+      </form>
+      <div class="mt-5 d-flex justify-content-center">
+        <a class="text-white" [routerLink]="['/register']">
+          Registrarme
+        </a>
+      </div>
+      <div *ngIf="loginError">
+        {{loginError}}
+      </div>
+      </div>
+      </div>
+
+  </ion-content>
+</ion-app>

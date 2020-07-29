@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth'; 
 import { environment } from 'src/environments/environment';
+import { LoginPageModule } from './pages/login/login.module';
 /*Services*/
 const Services = [AuthGuardService,]
 
@@ -24,7 +25,7 @@ const Services = [AuthGuardService,]
   entryComponents: [],
   imports: [
     BrowserModule, IonicModule.forRoot(), AppRoutingModule, SharedModule,
-    RegisterModule, HttpClientModule, AngularFireAuthModule,
+    RegisterModule, HttpClientModule, AngularFireAuthModule, LoginPageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
