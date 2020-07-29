@@ -37,8 +37,16 @@ ion-app{
     --ion-background-color: linear-gradient(#37A134, #19370F);
 }
 
+.picker-wrapper{
+    background-color: white !important;
+}
 .text-white{
     --color: white  !important;
+}
+
+
+button.picker-button, .picker-opt{
+    color: white !important;
 }
 
 .button-1{
@@ -48,6 +56,17 @@ ion-app{
     --height: 45px;
     --padding-start: 100px;
     --padding-end: 100px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}
+
+.button-2{
+    --background: #6A958A;
+    --border-radius: 25px;
+    --width: 50px;
+    --height: 45px;
+    --padding-start: 50px;
+    --padding-end: 50px;
     --padding-top: 10px;
     --padding-bottom: 10px;
 }

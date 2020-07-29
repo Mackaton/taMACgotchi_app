@@ -1,6 +1,7 @@
-<ion-app>
+<!--Register Step 0-->
+<ion-app *ngIf="registerStep==0">
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar class="bg-transparent">
       <ion-title>Registro</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -8,13 +9,13 @@
   <ion-content>
     <div class="container h-100 d-flex align-items-center justify-content-center">
       <div>
-        <form [formGroup]="userForm" (ngSubmit)="register()">
+        <form [formGroup]="userForm" (ngSubmit)="continueToStep(1)">
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Email</ion-label>
             <ion-input type="email" class="text-white" formControlName="email" class="text-white"></ion-input>
           </ion-item>
           <ion-item class="bg-transparent">
-            <ion-label class="text-white" position="floating">Password</ion-label>
+            <ion-label class="text-white" position="floating">Contraseña</ion-label>
             <ion-input type="password" class="text-white" formControlName="password"></ion-input>
           </ion-item >
           <ion-button type="submit" class="mt-5 button-1">Registrarme</ion-button>
@@ -32,3 +33,87 @@
     
   </ion-content>
 </ion-app>
+<!---------------------->
+
+<!--Register Step 1-->
+<ion-app *ngIf="registerStep==1">
+  <ion-header>
+    <ion-toolbar class="bg-transparent">
+      <ion-title>Registro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="container h-100 d-flex align-items-center justify-content-center">
+      <div>
+        <form [formGroup]="userForm" (ngSubmit)="continueToStep(2)">
+          <ion-item class="bg-transparent">
+            <ion-label class="text-white" position="floating">Confirmar email</ion-label>
+            <ion-input type="email" class="text-white" formControlName="confirm_email" class="text-white"></ion-input>
+          </ion-item>
+          <ion-item class="bg-transparent">
+            <ion-label class="text-white" position="floating">Confirmar contraseña</ion-label>
+            <ion-input type="password" class="text-white" formControlName="confirm_password"></ion-input>
+          </ion-item >
+          <div class="d-flex justify-content-center">
+            <ion-button class="mt-5 button-2" (click)="continueToStep(0)">Volver</ion-button>
+            <ion-button type="submit" class="mt-5 button-2">Continuar</ion-button>
+          </div>
+        </form>
+        <div *ngIf="registerError">
+          {{registerError}}
+        </div>
+      </div>
+    </div>
+    
+  </ion-content>
+</ion-app>
+<!---------------------->
+
+<!--Register Step 2-->
+<ion-app *ngIf="registerStep==2">
+<ion-header>
+  <ion-toolbar class="bg-transparent">
+    <ion-title>Datos personales</ion-title >
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content>
+    <div class="container h-100 d-flex align-items-center justify-content-center">
+      <div>
+        <form [formGroup]="userForm" (ngSubmit)="register()">
+          <ion-item class="bg-transparent">
+            <ion-label class="text-white" position="floating">Nombre</ion-label>
+            <ion-input type="text" class="text-white" formControlName="first_name" class="text-white"></ion-input>
+          </ion-item>
+          <ion-item class="bg-transparent">
+            <ion-label class="text-white" position="floating">Apellido</ion-label>
+            <ion-input type="text" class="text-white" formControlName="lastname"></ion-input>
+          </ion-item >
+          <ion-item class="bg-transparent">
+            <ion-label class="text-white" position="floating">Fecha de nacimiento</ion-label>
+            <ion-datetime type="text" class="text-white" formControlName="birthdate"></ion-datetime>
+          </ion-item >
+          <ion-item class="bg-transparent">
+            <ion-label class="text-white" position="floating">Género</ion-label>
+            <ion-select placeholder="Selecionar uno" class="text-white">
+              <ion-select-option value="f">Femenino</ion-select-option>
+              <ion-select-option value="m">Masculino</ion-select-option>
+              <ion-select-option value="O">Otro</ion-select-option>
+            </ion-select>
+          </ion-item >
+          <div class="d-flex justify-content-center">
+            <ion-button class="mt-5 button-2" (click)="continueToStep(1)">Volver</ion-button>
+            <ion-button type="submit" class="mt-5 button-2">Continuar</ion-button>
+          </div>
+        </form>
+        <div *ngIf="registerError">
+          {{registerError}}
+        </div>
+      </div>
+    </div>
+    
+  </ion-content>
+</ion-app>
+<!---------------------->
