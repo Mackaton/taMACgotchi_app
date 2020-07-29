@@ -9,16 +9,30 @@
   <ion-content>
     <div class="container h-100 d-flex align-items-center justify-content-center">
       <div>
-        <form [formGroup]="userForm" (ngSubmit)="continueToStep(1)">
+        <form [formGroup]="userForm">
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Email</ion-label>
             <ion-input type="email" class="text-white" formControlName="email" class="text-white"></ion-input>
           </ion-item>
+          <div *ngIf="userForm.get('email').touched && !userForm.get('email').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
+          <div *ngIf="userForm.get('email').touched && userForm.get('email').value && !userForm.get('email').valid">
+            <p class="form-error text-warning ml-3"><small>Tiene que ser como example@mail.com</small></p> 
+          </div>
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Contraseña</ion-label>
-            <ion-input type="password" class="text-white" formControlName="password"></ion-input>
+            <ion-input type="password" class="text-white" formControlName="password"
+            minlength="8"></ion-input>
           </ion-item >
-          <ion-button type="submit" class="mt-5 button-1">Registrarme</ion-button>
+          <div *ngIf="userForm.get('password').touched && !userForm.get('password').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
+          <div *ngIf="userForm.get('password').touched && userForm.get('password').value && !userForm.get('password').valid">
+            <p class="form-error text-warning ml-3"><small>Debe tener mínimo 8 caracteres</small></p> 
+          </div>
+          <ion-button class="mt-5 button-1" (click)="continueToStep(1)" 
+          [disabled]="!userForm.get('email').valid || !userForm.get('password').valid">Registrarme</ion-button>
         </form>
         <div class="mt-5 d-flex justify-content-center">
           <a class="text-white" [routerLink]="['/login']">
@@ -46,18 +60,34 @@
   <ion-content>
     <div class="container h-100 d-flex align-items-center justify-content-center">
       <div>
-        <form [formGroup]="userForm" (ngSubmit)="continueToStep(2)">
+        <form [formGroup]="userForm">
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Confirmar email</ion-label>
             <ion-input type="email" class="text-white" formControlName="confirm_email" class="text-white"></ion-input>
           </ion-item>
+          <div *ngIf="userForm.get('confirm_email').touched && !userForm.get('confirm_email').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
+          <div *ngIf="userForm.get('confirm_email').touched && userForm.get('confirm_email').value &&
+          userForm.get('confirm_email').value != userForm.get('email').value">
+            <p class="form-error text-warning ml-3"><small>Los emails deben ser iguales</small></p> 
+          </div>
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Confirmar contraseña</ion-label>
             <ion-input type="password" class="text-white" formControlName="confirm_password"></ion-input>
           </ion-item >
+          <div *ngIf="userForm.get('confirm_password').touched && !userForm.get('confirm_password').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
+          <div *ngIf="userForm.get('confirm_password').touched && userForm.get('confirm_password').value &&
+          userForm.get('confirm_password').value != userForm.get('password').value">
+            <p class="form-error text-warning ml-3"><small>Las contraseñas deben ser iguales</small></p> 
+          </div>
           <div class="d-flex justify-content-center">
             <ion-button class="mt-5 button-2" (click)="continueToStep(0)">Volver</ion-button>
-            <ion-button type="submit" class="mt-5 button-2">Continuar</ion-button>
+            <ion-button class="mt-5 button-2" (click)="continueToStep(2)"
+            [disabled]="!userForm.get('confirm_email').valid || !userForm.get('confirm_password').valid"
+            >Continuar</ion-button>
           </div>
         </form>
         <div *ngIf="registerError">
@@ -87,25 +117,40 @@
             <ion-label class="text-white" position="floating">Nombre</ion-label>
             <ion-input type="text" class="text-white" formControlName="first_name" class="text-white"></ion-input>
           </ion-item>
+          <div *ngIf="userForm.get('first_name').touched && !userForm.get('first_name').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Apellido</ion-label>
             <ion-input type="text" class="text-white" formControlName="lastname"></ion-input>
           </ion-item >
+          <div *ngIf="userForm.get('lastname').touched && !userForm.get('lastname').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Fecha de nacimiento</ion-label>
             <ion-datetime type="text" class="text-white" formControlName="birthdate"></ion-datetime>
           </ion-item >
+          <div *ngIf="userForm.get('birthdate').touched && !userForm.get('birthdate').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Género</ion-label>
-            <ion-select placeholder="Selecionar uno" class="text-white">
+            <ion-select placeholder="Selecionar uno" formControlName="gender" class="text-white">
               <ion-select-option value="f">Femenino</ion-select-option>
               <ion-select-option value="m">Masculino</ion-select-option>
               <ion-select-option value="O">Otro</ion-select-option>
             </ion-select>
           </ion-item >
+          <div *ngIf="userForm.get('gender').touched && !userForm.get('gender').value">
+            <p class="form-error text-warning ml-3"><small>Este campo es requerido</small></p> 
+          </div>
           <div class="d-flex justify-content-center">
             <ion-button class="mt-5 button-2" (click)="continueToStep(1)">Volver</ion-button>
-            <ion-button type="submit" class="mt-5 button-2">Continuar</ion-button>
+            <ion-button type="submit" class="mt-5 button-2"
+            [disabled]="!userForm.get('first_name').valid || !userForm.get('lastname').valid
+            || !userForm.get('birthdate').valid || !userForm.get('gender').valid"
+            >Continuar</ion-button>
           </div>
         </form>
         <div *ngIf="registerError">
