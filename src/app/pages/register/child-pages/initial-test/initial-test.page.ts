@@ -51,7 +51,15 @@ export class InitialTestPage implements OnInit {
     this._authService.setCompletedInitialTest();
     this.testStep = 0;
     this.testForm.reset();
+    this.goToStep(3)
+  }
+
+  goToMain(){
     this.router.navigate([''])
   }
+
+
+
+
   
 }

@@ -87,7 +87,64 @@
         
       </ion-content>
     </ion-app> 
+
+    <ion-app *ngIf="testStep==2">
+    <ion-header>
+      <ion-toolbar class="bg-transparent">
+        <ion-title>Test inicial</ion-title >
+      </ion-toolbar>
+    </ion-header>
+    
+    
+      <ion-content>
+        <div class="container h-100 d-flex align-items-center justify-content-center">
+          <div>
+            <form [formGroup]="testForm">
+              <ion-item class="bg-transparent">
+                <p class="text-white">{{testQuestions[1].question}}</p>
+                <ion-label class="text-white" position="floating">Respuesta</ion-label>
+                <ion-input type="text" class="text-white" formControlName="questions" class="text-white"></ion-input>
+              </ion-item>
+              <ion-item class="bg-transparent mt-5">
+                <p class="text-white">{{testQuestions[2].question}}</p>
+                <ion-label class="text-white" position="floating">Respuesta</ion-label>
+                <ion-input type="text" class="text-white" formControlName="questions" class="text-white"></ion-input>
+              </ion-item>
+              <div class="d-flex justify-content-center">
+                <ion-button class="mt-5 button-2" (click)="sendTest()">Continuar</ion-button>
+              </div>
+            </form>
+            <div *ngIf="registerError">
+              {{registerError}}
+            </div>
+          </div>
+        </div>
+        
+      </ion-content>
+    </ion-app> 
 <!------------->
+
+<!--Final Test-->
+<ion-app *ngIf="testStep==3">
+  <ion-header>
+    <ion-toolbar class="bg-transparent">
+      <ion-title>Test inicial</ion-title >
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  <ion-content>
+    <div class="container h-100 d-flex align-items-center justify-content-center flex-column">
+      <img src="../../../../../assets/initial-test-meme.png" style="width:150px;" alt="">
+      <p class="text-white text-center mt-5">
+        ¡Listo ahora conoce a tu planta y comienza a cuidarla!
+      </p>
+      <ion-button class="mt-5 button-1" (click)="goToMain()">Continuar</ion-button>
+
+    </div>
+    
+  </ion-content>
+  </ion-app> 
 
 
 
