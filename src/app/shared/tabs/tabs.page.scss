@@ -1,3 +1,12 @@
 ion-tab-bar{
     --ion-background-color: #37A134;
+    --ion-background-color: #37A134;
+}
+
+.label-tab{
+    color: white;
+}
+
+ion-tab-button{
+    --color-selected: black !important;
 }
