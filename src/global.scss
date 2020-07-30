@@ -28,6 +28,9 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
 
 .bg-transparent{
     --ion-background-color: transparent;
@@ -37,9 +40,7 @@ ion-app{
     --ion-background-color: linear-gradient(#37A134, #19370F);
 }
 
-.picker-wrapper{
-    background-color: white !important;
-}
+
 .text-white{
     --color: white  !important;
 }
@@ -48,6 +49,11 @@ ion-app{
 button.picker-button, .picker-opt{
     color: white !important;
 }
+
+.picker-opt.picker-opt-selected, .picker-prefix, .picker-suffix {
+    color: color("yellow") !important;
+}
+
 
 .button-1{
     --background: #6A958A;
@@ -69,4 +75,13 @@ button.picker-button, .picker-opt{
     --padding-end: 50px;
     --padding-top: 10px;
     --padding-bottom: 10px;
+}
+
+ion-alert{
+    --background:#E5E5E5 !important;
+}
+
+ion-picker{
+    --background: rgba(0, 0, 0, 0.8) !important;
+
 }
