@@ -53,7 +53,7 @@ export class BaseService {
      * or error if not
      * @memberof BaseService
      */
-    addBase(element: Object, endpoint: string):Observable<any>{
+    postBase(element: Object, endpoint: string):Observable<any>{
         let apiURL =  `${this.API_URL}${endpoint}`
         return this.http.post(apiURL, element, httpOptions).pipe(
             catchError(this.handleError<any>('addBase'))
@@ -69,7 +69,7 @@ export class BaseService {
      * or error if not
      * @memberof BaseService
      */
-    updateBase(element: Object, endpoint: string):Observable<any>{
+    putBase(element: Object, endpoint: string):Observable<any>{
         let apiURL =  `${this.API_URL}${endpoint}`
         return this.http.put(apiURL, element, httpOptions).pipe(
             catchError(this.handleError<any>('updateBase'))

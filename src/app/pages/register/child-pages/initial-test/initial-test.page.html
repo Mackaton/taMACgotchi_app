@@ -18,20 +18,25 @@
 
 <ion-app *ngIf="testStep==1">
     <ion-content>
-      <div class="container h-100 d-flex align-items-center justify-content-center">
-        <div>
-          <form [formGroup]="testForm">
-            <ion-item class="bg-transparent">
-              <p class="text-white">{{testQuestions[0].question}}</p>
-              <ion-label class="text-white" position="floating">Respuesta</ion-label>
-              <ion-input type="text" class="text-white" formControlName="questions" class="text-white"></ion-input>
-            </ion-item>
-            <div class="d-flex justify-content-center">
-              <ion-button class="mt-5 button-2" (click)="goToStep(2)">Continuar</ion-button>
+      <div class="container">
+        <div class="container">
+          <h2 class="text-white text-center mt-5 mb-5">Test Inicial</h2>
+            <div *ngFor="let question of testQuestions; index as i">
+              <form [formGroup]="questionsArray.controls[i]">
+              <div class="mt-4">
+                <p class="text-white">{{question.description}}</p>
+                <div *ngFor="let option of question.options">
+                    <input class="form-check-input" type="radio" name="value" id="exampleRadios-{{option._id}}" value="{{option.value}}"
+                    formControlName="value">
+                    <label class="form-check-label text-white" for="exampleRadios-{{option._id}">
+                      {{option.option}}
+                    </label>
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
-          <div *ngIf="registerError">
-            {{registerError}}
+          <div class="d-flex justify-content-center">
+            <ion-button class="mt-5 button-2" (click)="sendTest()">Continuar</ion-button>
           </div>
         </div>
       </div>
@@ -39,65 +44,10 @@
     </ion-content>
   </ion-app>
   
-<ion-app *ngIf="testStep==2">
-      <ion-content>
-        <div class="container h-100 d-flex align-items-center justify-content-center">
-          <div>
-            <form [formGroup]="testForm">
-              <ion-item class="bg-transparent">
-                <p class="text-white">{{testQuestions[1].question}}</p>
-                <ion-label class="text-white" position="floating">Respuesta</ion-label>
-                <ion-input type="text" class="text-white" formControlName="questions" class="text-white"></ion-input>
-              </ion-item>
-              <ion-item class="bg-transparent mt-5">
-                <p class="text-white">{{testQuestions[2].question}}</p>
-                <ion-label class="text-white" position="floating">Respuesta</ion-label>
-                <ion-input type="text" class="text-white" formControlName="questions" class="text-white"></ion-input>
-              </ion-item>
-              <div class="d-flex justify-content-center">
-                <ion-button class="mt-5 button-2" (click)="sendTest()">Continuar</ion-button>
-              </div>
-            </form>
-            <div *ngIf="registerError">
-              {{registerError}}
-            </div>
-          </div>
-        </div>
-        
-      </ion-content>
-    </ion-app> 
-
-    <ion-app *ngIf="testStep==2">
-      <ion-content>
-        <div class="container h-100 d-flex align-items-center justify-content-center">
-          <div>
-            <form [formGroup]="testForm">
-              <ion-item class="bg-transparent">
-                <p class="text-white">{{testQuestions[1].question}}</p>
-                <ion-label class="text-white" position="floating">Respuesta</ion-label>
-                <ion-input type="text" class="text-white" formControlName="questions" class="text-white"></ion-input>
-              </ion-item>
-              <ion-item class="bg-transparent mt-5">
-                <p class="text-white">{{testQuestions[2].question}}</p>
-                <ion-label class="text-white" position="floating">Respuesta</ion-label>
-                <ion-input type="text" class="text-white" formControlName="questions" class="text-white"></ion-input>
-              </ion-item>
-              <div class="d-flex justify-content-center">
-                <ion-button class="mt-5 button-2" (click)="sendTest()">Continuar</ion-button>
-              </div>
-            </form>
-            <div *ngIf="registerError">
-              {{registerError}}
-            </div>
-          </div>
-        </div>
-        
-      </ion-content>
-    </ion-app> 
 <!------------->
 
 <!--Final Test-->
-<ion-app *ngIf="testStep==3">
+<ion-app *ngIf="testStep==2">
   <ion-content>
     <div class="container h-100 d-flex align-items-center justify-content-center flex-column">
       <img src="../../../../../assets/initial-test-meme.png" style="width:150px;" alt="">

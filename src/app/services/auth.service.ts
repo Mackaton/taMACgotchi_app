@@ -51,6 +51,10 @@ export class AuthService {
         localStorage.setItem('userPersonalInfo', JSON.stringify(user));
     }
 
+    getUserPersonalInfo(){
+        return JSON.parse(localStorage.getItem('userPersonalInfo'));
+    }
+
     async login(user:any){
         return await this._authFireAuth.signInWithEmailAndPassword(user.get('email').value,user.get('password').value)
         .catch(err=>{
@@ -67,19 +71,14 @@ export class AuthService {
     }
 
     isCompletedInitialTest(){
-        var userPersonalInfo = JSON.parse(localStorage.getItem('userPersonalInfo'));
-        if (userPersonalInfo.completedInitialTest){
-            return true
-        }
-        else{
-            return false
-        }
+        var isCompletedInitialTest = JSON.parse(localStorage.getItem('isCompletedInitialTest'));
+        console.log(isCompletedInitialTest);
+        return isCompletedInitialTest
     }
 
-    setCompletedInitialTest(){
-        var userPersonalInfo = JSON.parse(localStorage.getItem('userPersonalInfo'));
-        userPersonalInfo.completedInitialTest = true;
-        localStorage.setItem('userPersonalInfo', JSON.stringify(userPersonalInfo));
+    setCompletedInitialTest(isCompleted:boolean){
+        console.log(isCompleted)
+        localStorage.setItem('isCompletedInitialTest', JSON.stringify(isCompleted));
     }
 
 
@@ -88,7 +87,6 @@ export class AuthService {
 
     getCurrentUser() {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      console.log(currentUser)
       return currentUser;
     }
 

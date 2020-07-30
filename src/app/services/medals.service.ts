@@ -9,18 +9,18 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService extends BaseService{
+export class MedalsService extends BaseService{
 
     constructor(http:HttpClient) {
         super(http)
     }
 
-    createUser(user:any):Observable<any>{
-        return this.postBase(user,'/create/users/');
+    getAllMedals():Observable<any>{
+        return this.getBase('/medals/');
     }
 
-    getUserDetail(user:any):Observable<any>{
-        return this.getBase(`/users/${user.email}`)
+    getMedalDetail(medal):Observable<any>{
+        return this.getBase(`/medals/${medal.id}`)
     }
 
 }

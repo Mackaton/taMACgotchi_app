@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InitialTestService } from 'src/app/services/initial-test.service';
@@ -10,12 +10,13 @@ import { InitialTestService } from 'src/app/services/initial-test.service';
   styleUrls: ['./initial-test.page.scss'],
 })
 export class InitialTestPage implements OnInit {
-  testForm:FormGroup
   registerError:string;
   testStep:number = 0;
   testQuestions:any;
   numberTotalSteps:number;
   pagesSteps:Array<any> = [];
+  questionsArray:FormArray;
+  questionForm:FormGroup
 
   constructor(
     public router: Router,
@@ -25,11 +26,8 @@ export class InitialTestPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.testForm = this.formBuilder.group({
-      questions: new FormControl('',Validators.required),
-    });
-    this.testQuestions = this._initialTestService.getTestQuestions();
-    this.preparePagesSteps();
+    this.questionsArray = new FormArray([]);
+    this.getQuestions();
   }
 
   goToStep(step:number){
@@ -47,10 +45,33 @@ export class InitialTestPage implements OnInit {
     console.log(this.pagesSteps)
   }
 
+  getQuestions(){
+    this._initialTestService.getAllQuestions().subscribe(data=>{
+      console.log(data);
+      this.testQuestions = data;
+      this.testQuestions.forEach(question => {
+        this.questionsArray.push(this.formBuilder.group({
+          id_question: new FormControl(question._id),
+          value: new FormControl(''),
+        }))
+      });
+      console.log(this.questionsArray)
+      console.log(this.questionForm)
+    })
+  }
+
   sendTest(){
-    this._authService.setCompletedInitialTest();
+    this.questionForm =  this.formBuilder.group({
+      user: new FormControl(this._authService.getUserPersonalInfo()._id),
+      date: new FormControl(new Date()),
+      results: new FormControl(this.questionsArray.value)
+    })
+    console.log(this.questionForm.value)
+    this._initialTestService.createTest(this.questionForm.value).subscribe(data=>{
+      console.log(data);
+    })
+    //this._authService.setCompletedInitialTest();
     this.testStep = 0;
-    this.testForm.reset();
     this.goToStep(3)
   }
 

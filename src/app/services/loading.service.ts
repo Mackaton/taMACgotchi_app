@@ -22,7 +22,7 @@ export class LoadingService {
         return new Promise(async (resolve,reject)=>{
             const loading = await this.loadingController.create({
                 cssClass: 'my-custom-class',
-                message: 'Please wait...',
+                message: message,
                 duration: 2000
               });
               loading.present().then(()=>{
@@ -32,9 +32,7 @@ export class LoadingService {
     }
 
     async stopLoading(loading:any){
-        console.log(loading)
         const { role, data } = await loading.onDidDismiss();
-        console.log('Loading dismissed!');
     }
     
     
