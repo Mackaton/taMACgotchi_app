@@ -74,7 +74,9 @@
           <div class="d-flex justify-content-center">
             <ion-button class="mt-5 button-2" (click)="continueToStep(0)">Volver</ion-button>
             <ion-button class="mt-5 button-2" (click)="continueToStep(2)"
-            [disabled]="!userForm.get('confirm_email').valid || !userForm.get('confirm_password').valid"
+            [disabled]="!userForm.get('confirm_email').valid || !userForm.get('confirm_password').valid
+            || (userForm.get('confirm_email').value != userForm.get('email').value)
+            || (userForm.get('confirm_password').value != userForm.get('password').value)"
             >Continuar</ion-button>
           </div>
         </form>
