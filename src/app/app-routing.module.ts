@@ -8,14 +8,34 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule),
   },
   {
-    path: '',
-    loadChildren: () => import('./shared/tabs/tabs.module').then(m => m.TabsPageModule),
-    canActivate: [AuthGuardService] 
-
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'garden',
+    loadChildren: () => import('./pages/garden/garden.module').then( m => m.GardenPageModule)
+  },
+  {
+    path: 'tasks',
+    loadChildren: () => import('./pages/tasks/tasks.module').then( m => m.TasksPageModule)
+  },
+  {
+    path: 'achivements',
+    loadChildren: () => import('./pages/achivements/achivements.module').then( m => m.AchivementsPageModule)
+  },
+  {
+    path: 'friends',
+    loadChildren: () => import('./pages/friends/friends.module').then( m => m.FriendsPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    //canActivate: [AuthGuardService] 
+
   },
 ];
 @NgModule({

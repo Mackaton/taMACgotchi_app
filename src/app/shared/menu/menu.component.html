@@ -1,4 +1,17 @@
 <ion-menu content-id="content">  
+  <ion-header>
+    <div class="d-flex justify-content-center align-items-center mt-5">
+      <ion-icon name="person" class="text-white mr-3" style="font-size: 50px;"></ion-icon>
+      <div class="d-flex align-items-center flex-column">
+        <p class="text-white mb-0">
+          {{userProfile.name}} {{userProfile.lastname}}
+        </p>
+        <p class="text-white mb-0">
+          {{userProfile.email}}
+        </p>
+      </div>
+    </div>
+  </ion-header>
   <ion-content>
 
     <ion-list class="mt-5">
@@ -9,8 +22,38 @@
             Inicio
           </ion-label>
         </ion-item>
+        <ion-item button>
+          <ion-icon slot="start" name="flower" class="text-white"></ion-icon>
+          <ion-label class="text-white">
+            Jardín
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon slot="start" name='book' class="text-white"></ion-icon>
+          <ion-label class="text-white">
+            Tareas
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon slot="start" name='trophy' class="text-white"></ion-icon>
+          <ion-label class="text-white">
+            Logros
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon slot="start" name='people' class="text-white"></ion-icon>
+          <ion-label class="text-white">
+            Amigos
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-icon slot="start" name='settings' class="text-white"></ion-icon>
+          <ion-label class="text-white">
+            Configuraciones
+          </ion-label>
+        </ion-item>
         <ion-item button (click)="logout()">
-          <ion-icon slot="start" name='close-outline' class="text-white"></ion-icon>
+          <ion-icon slot="start" name='close' class="text-white"></ion-icon>
           <ion-label class="text-white">
             Cerrar sesion
           </ion-label>

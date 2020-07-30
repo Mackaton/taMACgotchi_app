@@ -8,14 +8,25 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MenuComponent implements OnInit {
 
+  userProfile:any;
+
   constructor(
     private _authService:AuthService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUserProfileInfo();
+  }
 
   logout(){
     this._authService.logout();
   }
+
+  getUserProfileInfo(){
+    this.userProfile = this._authService.getUserPersonalInfo();
+    console.log(this.userProfile)
+  }
+
+
 
 }
