@@ -1,8 +1,9 @@
 <!--Register Step 0-->
 <ion-app *ngIf="registerStep==0">
   <ion-content>
-    <div class="container h-100 d-flex align-items-center justify-content-center">
-      <div>
+    <div class="container h-100 d-flex align-items-center justify-content-center flex-column">
+      <img src="../../../assets/logo.png" style="max-width: 60%;" alt="">
+      <div class="mt-4">
         <form [formGroup]="userForm">
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Email</ion-label>
@@ -46,8 +47,9 @@
 <!--Register Step 1-->
 <ion-app *ngIf="registerStep==1">
   <ion-content>
-    <div class="container h-100 d-flex align-items-center justify-content-center">
-      <div>
+    <div class="container h-100 d-flex align-items-center justify-content-center flex-column">
+      <img src="../../../assets/logo.png" style="max-width: 60%;" alt="">
+      <div class="mt-4">
         <form [formGroup]="userForm">
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Confirmar email</ion-label>
@@ -93,8 +95,9 @@
 <!--Register Step 2-->
 <ion-app *ngIf="registerStep==2">
   <ion-content>
-    <div class="container h-100 d-flex align-items-center justify-content-center">
-      <div>
+    <div class="container h-100 d-flex align-items-center justify-content-center flex-column">
+      <img src="../../../assets/logo.png" style="max-width: 60%;" alt="">
+      <div class="mt-4">
         <form [formGroup]="userForm">
           <ion-item class="bg-transparent">
             <ion-label class="text-white" position="floating">Nombre</ion-label>
@@ -150,8 +153,9 @@
 <!--Register Step 3-->
 <ion-app *ngIf="registerStep==3">  
     <ion-content>
-      <div class="container h-100 d-flex align-items-center justify-content-center">
-        <div>
+      <div class="container h-100 d-flex align-items-center justify-content-center flex-column">
+        <img src="../../../assets/logo.png" style="max-width: 60%;" alt="">
+        <div class="mt-4">
           <form [formGroup]="userForm" (ngSubmit)="register()">
             <ion-item class="bg-transparent">
               <ion-label class="text-white" position="floating">Usuario</ion-label>

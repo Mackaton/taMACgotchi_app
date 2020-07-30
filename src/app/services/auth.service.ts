@@ -72,12 +72,10 @@ export class AuthService {
 
     isCompletedInitialTest(){
         var isCompletedInitialTest = JSON.parse(localStorage.getItem('isCompletedInitialTest'));
-        console.log(isCompletedInitialTest);
         return isCompletedInitialTest
     }
 
     setCompletedInitialTest(isCompleted:boolean){
-        console.log(isCompleted)
         localStorage.setItem('isCompletedInitialTest', JSON.stringify(isCompleted));
     }
 
@@ -93,5 +91,10 @@ export class AuthService {
     logout(){
         this.router.navigate(['register']);
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('userPersonalInfo');
+        if (localStorage.getItem('isCompletedInitialTest')){
+            localStorage.removeItem('isCompletedInitialTest');
+        }
+
     }
 }

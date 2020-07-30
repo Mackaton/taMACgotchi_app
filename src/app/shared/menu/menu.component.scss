@@ -1,3 +1,10 @@
-ion-menu{
-    --ion-background-color: rgba(0, 0, 0, 0.8);
+:host{
+    ion-menu{
+        --ion-background-color: rgba(0, 0, 0, 0.8);
+        --background-color: rgba(0, 0, 0, 0.8);
+        ion-content{
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+    }
 }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@ang
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InitialTestService } from 'src/app/services/initial-test.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-initial-test',
@@ -16,23 +17,25 @@ export class InitialTestPage implements OnInit {
   numberTotalSteps:number;
   pagesSteps:Array<any> = [];
   questionsArray:FormArray;
-  questionForm:FormGroup
+  questionForm:FormGroup;
+  userProfile:any;
 
   constructor(
     public router: Router,
     public formBuilder: FormBuilder,
     public _authService: AuthService,
     public _initialTestService:InitialTestService,
+    public _loadingService: LoadingService,
   ) { }
 
   ngOnInit() {
     this.questionsArray = new FormArray([]);
     this.getQuestions();
+    this.userProfile = this._authService.getUserPersonalInfo();
   }
 
   goToStep(step:number){
     this.testStep = step;
-    console.log(this.testStep);
   }
 
   preparePagesSteps(){
@@ -42,12 +45,10 @@ export class InitialTestPage implements OnInit {
         second_question: this.testQuestions[i+1]
       })
     }
-    console.log(this.pagesSteps)
   }
 
   getQuestions(){
     this._initialTestService.getAllQuestions().subscribe(data=>{
-      console.log(data);
       this.testQuestions = data;
       this.testQuestions.forEach(question => {
         this.questionsArray.push(this.formBuilder.group({
@@ -55,32 +56,43 @@ export class InitialTestPage implements OnInit {
           value: new FormControl(''),
         }))
       });
-      console.log(this.questionsArray)
-      console.log(this.questionForm)
     })
   }
 
   sendTest(){
     this.questionForm =  this.formBuilder.group({
-      user: new FormControl(this._authService.getUserPersonalInfo()._id),
-      date: new FormControl(new Date()),
+      username: new FormControl(this.userProfile.username),
       results: new FormControl(this.questionsArray.value)
     })
     console.log(this.questionForm.value)
-    this._initialTestService.createTest(this.questionForm.value).subscribe(data=>{
-      console.log(data);
+    this._loadingService.presentLoading('Subiendo Test').then((loading)=>{
+      this._initialTestService.createTest(this.questionForm.value).subscribe(data=>{
+        if (data){
+          if (!data.error){
+            this.saveTest(loading);
+          }else{
+              this._loadingService.stopLoading(loading)
+          }
+        }else{
+          this._loadingService.stopLoading(loading)
+        }
+      })
     })
-    //this._authService.setCompletedInitialTest();
-    this.testStep = 0;
-    this.goToStep(3)
   }
 
-  goToMain(){
-    this.router.navigate([''])
+  saveTest(loading){
+    this._initialTestService.getTestDetailByUser(this.userProfile).subscribe(data=>{
+      if (data){
+        if (!data.error){
+          this._authService.setCompletedInitialTest(true);
+          this.router.navigate(['/start-new-plant'])
+        }else{
+            this._loadingService.stopLoading(loading)
+        }
+      }else{
+        this._loadingService.stopLoading(loading)
+      }
+    })
   }
-
-
-
-
   
 }

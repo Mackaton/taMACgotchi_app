@@ -39,23 +39,23 @@ export class AppComponent {
   }
 
   getUserDetail(){
-    this._loadingService.presentLoading('Cargando informacion del usuario').then((loading)=>{
-      if (this._authService.isAuthenticated){
+    if (this._authService.isAuthenticated()){
+      this._loadingService.presentLoading('Cargando informacion del usuario').then((loading)=>{
         let user = this._authService.getCurrentUser();
         this._usersService.getUserDetail(user.user).subscribe((data)=>{
           if (data){
             if (!data.error){
-              this._authService.saveUserPersonalInfo(data[0])
-              this.getInitialTest(data[0],loading);
-            }else{
+              this._authService.saveUserPersonalInfo(data)
+              this.getInitialTest(data,loading);
+            }else{ 
               this._loadingService.stopLoading(loading)
             }
           }else{
             this._loadingService.stopLoading(loading)
           }
         })
-      }
-    })
+      })
+    }
   }
 
   getInitialTest(user,loading){

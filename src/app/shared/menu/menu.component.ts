@@ -24,7 +24,6 @@ export class MenuComponent implements OnInit {
 
   getUserProfileInfo(){
     this.userProfile = this._authService.getUserPersonalInfo();
-    console.log(this.userProfile)
   }
 
 

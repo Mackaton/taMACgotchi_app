@@ -1,7 +1,8 @@
 <ion-app >
   <ion-content>
-    <div class="container h-100 d-flex align-items-center justify-content-center">
-      <div>
+    <div class="container h-100 d-flex align-items-center justify-content-center flex-column">
+      <img src="../../../assets/logo.png" style="max-width: 60%;" alt="">
+      <div class="mt-4">
         <form [formGroup]="userForm" (ngSubmit)="login()">
         <ion-item class="bg-transparent">
           <ion-label class="text-white" position="floating">Email</ion-label>

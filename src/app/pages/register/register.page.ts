@@ -48,19 +48,18 @@ export class RegisterPage implements OnInit {
         if (data){
           if (data.additionalUserInfo){
             this._authService.saveTokenAuthenticated(data);
-            this._authService.saveUserPersonalInfo(this.userForm.value)
             this.buildRequest();
+            console.log(this.request)
             this._usersService.createUser(this.request).subscribe(data=>{
               if (data && !data.error){
-                console.log(data);
-                this._loadingService.stopLoading(loading)
+                this.registerStep = 0;
+                this.userForm.reset();
+                this.retriveUserProfile(loading);
               }else{
                 this._loadingService.stopLoading(loading)
               }
             })
-            this.registerStep = 0;
-            this.userForm.reset();
-            this.router.navigate(['initial-test']);
+
           }else{
             this.registerError = data.message
             this._loadingService.stopLoading(loading)
@@ -75,7 +74,6 @@ export class RegisterPage implements OnInit {
   buildRequest(){
     
     let token:any = this._authService.getTokenAuthenticated();
-    console.log(token)
     let provider:string = token.additionalUserInfo.providerId
     this.request = {
       username: this.userForm.value.username,
@@ -83,10 +81,20 @@ export class RegisterPage implements OnInit {
       provider: provider,
       name: this.userForm.value.first_name,
       lastname: this.userForm.value.lastname,
-      birthday: this.userForm.value.birthdate,
-      gender: this.userForm.value.gender,
       picture: null
     }
-    console.log(this.request)
+  }
+
+  retriveUserProfile(loading){
+    this._usersService.getUserDetail(this.request).subscribe(data=>{
+      if (data && !data.error){
+        this._authService.saveUserPersonalInfo(data);
+        this._loadingService.stopLoading(loading)
+        this.router.navigate(['initial-test']);
+      }else{
+        this._loadingService.stopLoading(loading)
+      }
+
+    })
   }
 }

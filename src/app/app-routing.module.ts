@@ -9,32 +9,45 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
   },
   {
     path: 'garden',
-    loadChildren: () => import('./pages/garden/garden.module').then( m => m.GardenPageModule)
+    loadChildren: () => import('./pages/garden/garden.module').then( m => m.GardenPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'tasks',
-    loadChildren: () => import('./pages/tasks/tasks.module').then( m => m.TasksPageModule)
+    loadChildren: () => import('./pages/tasks/tasks.module').then( m => m.TasksPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'achivements',
-    loadChildren: () => import('./pages/achivements/achivements.module').then( m => m.AchivementsPageModule)
+    loadChildren: () => import('./pages/achivements/achivements.module').then( m => m.AchivementsPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'friends',
-    loadChildren: () => import('./pages/friends/friends.module').then( m => m.FriendsPageModule)
+    loadChildren: () => import('./pages/friends/friends.module').then( m => m.FriendsPageModule),
+    canActivate: [AuthGuardService] 
+
   },
   {
     path: 'settings',
-    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule),
+    canActivate: [AuthGuardService] 
+
+  },
+  {
+    path: 'start-new-plant',
+    loadChildren: () => import('./start-new-plant/start-new-plant.module').then( m => m.StartNewPlantPageModule),
+    canActivate: [AuthGuardService] 
+
   },
   {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
-    //canActivate: [AuthGuardService] 
+    canActivate: [AuthGuardService] 
 
   },
 ];
