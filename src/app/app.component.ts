@@ -16,7 +16,7 @@ export class AppComponent {
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
   ) {
-    this.initializeApp();
+      this.initializeApp();
   }
 
 
@@ -25,7 +25,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      if (this.platform.is('android')) {
+        this.statusBar.backgroundColorByHexString("#00000000");
+      }      
       this.splashScreen.hide();
     });
   }
