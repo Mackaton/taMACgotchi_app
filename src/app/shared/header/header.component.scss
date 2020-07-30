@@ -1,10 +1,8 @@
-ion-toolbar{
-    --background: #37A134;
-}
-
-ion-button{
+ion-fab-button{
     --background: transparent;
-}
-ion-menu-button{
-    --background: transparent;
+    --box-shadow: none;
+    
+    ion-icon{
+        font-size: 200px !important;
+    }
 }
