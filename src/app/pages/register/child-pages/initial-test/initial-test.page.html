@@ -25,11 +25,13 @@
               <form [formGroup]="questionsArray.controls[i]">
               <div class="mt-4">
                 <p class="text-white">{{question.description}}</p>
-                <div *ngFor="let option of question.options">
-                    <input class="form-check-input" type="radio" name="value" id="exampleRadios-{{option._id}}" value="{{option.value}}&{{option.index}}"
+                <div *ngFor="let option of question.options" id="donate">
+                    <label class="form-check-label text-white green" for="exampleRadios-{{option._id}">
+                      <input class="form-check-input" type="radio" name="value" id="exampleRadios-{{option._id}}" value="{{option.value}}&{{option.index}}"
                     formControlName="value">
-                    <label class="form-check-label text-white" for="exampleRadios-{{option._id}">
+                    <span>
                       {{option.option}}
+                      </span>
                     </label>
                   </div>
                 </div>
