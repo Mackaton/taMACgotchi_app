@@ -62,37 +62,29 @@ export class InitialTestPage implements OnInit {
   sendTest(){
     this.questionForm =  this.formBuilder.group({
       username: new FormControl(this.userProfile.username),
-      results: new FormControl(this.questionsArray.value)
+      results: new FormControl(this.questionsArray.value),
+      date: new FormControl(new Date()),
     })
+    this.questionForm.value.results.forEach(result => {
+      result.value = Number(result.value)
+    });
     console.log(this.questionForm.value)
-    this._loadingService.presentLoading('Subiendo Test').then((loading)=>{
-      this._initialTestService.createTest(this.questionForm.value).subscribe(data=>{
-        if (data){
-          if (!data.error){
-            this.saveTest(loading);
-          }else{
-              this._loadingService.stopLoading(loading)
-          }
-        }else{
-          this._loadingService.stopLoading(loading)
-        }
-      })
-    })
-  }
-
-  saveTest(loading){
-    this._initialTestService.getTestDetailByUser(this.userProfile).subscribe(data=>{
+    this._loadingService.showLoader('Subiendo test');
+    this._initialTestService.createTest(this.questionForm.value).subscribe(data=>{
+      console.log(data);
       if (data){
         if (!data.error){
+          this._loadingService.hideLoader();
           this._authService.setCompletedInitialTest(true);
           this.router.navigate(['/start-new-plant'])
         }else{
-            this._loadingService.stopLoading(loading)
+          this._loadingService.hideLoader();
         }
       }else{
-        this._loadingService.stopLoading(loading)
+        this._loadingService.hideLoader();
       }
     })
   }
+
   
 }

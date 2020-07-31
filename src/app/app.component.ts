@@ -40,38 +40,23 @@ export class AppComponent {
 
   getUserDetail(){
     if (this._authService.isAuthenticated()){
-      this._loadingService.presentLoading('Cargando informacion del usuario').then((loading)=>{
         let user = this._authService.getCurrentUser();
+        this._loadingService.showLoader('Cargando informacion del usuario')
         this._usersService.getUserDetail(user.user).subscribe((data)=>{
           if (data){
+            console.log(data);
             if (!data.error){
+              this._loadingService.hideLoader();
               this._authService.saveUserPersonalInfo(data)
-              this.getInitialTest(data,loading);
+              this._authService.setCompletedInitialTest(data.tested);
             }else{ 
-              this._loadingService.stopLoading(loading)
+              this._loadingService.hideLoader();
             }
           }else{
-            this._loadingService.stopLoading(loading)
+            this._loadingService.hideLoader();
           }
         })
-      })
     }
   }
 
-  getInitialTest(user,loading){
-    this._initialTest.getTestDetailByUser(user).subscribe(data=>{
-      if (data){
-        if (!data.error){
-          if (data.length > 0){
-            this._authService.setCompletedInitialTest(true)
-          }else{
-            this._authService.setCompletedInitialTest(false)
-          }
-          this._loadingService.stopLoading(loading)
-        }
-        this._loadingService.stopLoading(loading)
-      }
-      this._loadingService.stopLoading(loading)
-    })
-  }
 }

@@ -11,9 +11,9 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class RegisterPage implements OnInit {
 
-  userForm:FormGroup
-  registerError:string;
-  registerStep:number = 0;
+  userForm: FormGroup
+  registerError: string;
+  registerStep: number = 0;
   request: any;
 
   constructor(
@@ -22,7 +22,7 @@ export class RegisterPage implements OnInit {
     public _authService: AuthService,
     public _loadingService: LoadingService,
     public _usersService: UsersService,
-  ){}
+  ) { }
 
   async ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -34,47 +34,44 @@ export class RegisterPage implements OnInit {
       lastname: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
-      username: new FormControl('',Validators.required),
+      username: new FormControl('', Validators.required),
     })
   }
 
-  continueToStep(step:number){
+  continueToStep(step: number) {
     this.registerStep = step;
   }
 
-  async register(){
-    this._loadingService.presentLoading('Registrando').then((loading)=>{
-      this._authService.register(this.userForm).then((data:any)=>{
-        if (data){
-          if (data.additionalUserInfo){
-            this._authService.saveTokenAuthenticated(data);
-            this.buildRequest();
-            console.log(this.request)
-            this._usersService.createUser(this.request).subscribe(data=>{
-              if (data && !data.error){
-                this.registerStep = 0;
-                this.userForm.reset();
-                this.retriveUserProfile(loading);
-              }else{
-                this._loadingService.stopLoading(loading)
-              }
-            })
-
-          }else{
-            this.registerError = data.message
-            this._loadingService.stopLoading(loading)
-          }
-        }else{
-          this._loadingService.stopLoading(loading)
+  async register() {
+    this._loadingService.showLoader('Registrando usuario');
+    this._authService.register(this.userForm).then((data: any) => {
+      if (data) {
+        if (data.additionalUserInfo) {
+          this._authService.saveTokenAuthenticated(data);
+          this.buildRequest();
+          this._usersService.createUser(this.request).subscribe(data => {
+            if (data && !data.error) {
+              this.registerStep = 0;
+              this.userForm.reset();
+              this.retriveUserProfile();
+            } else {
+              this._loadingService.hideLoader();
+            }
+          })
+        } else {
+          this._loadingService.hideLoader();
+          this.registerError = data.message
         }
-      })
+      } else {
+        this._loadingService.hideLoader();
+      }
     })
   }
 
-  buildRequest(){
-    
-    let token:any = this._authService.getTokenAuthenticated();
-    let provider:string = token.additionalUserInfo.providerId
+  buildRequest() {
+
+    let token: any = this._authService.getTokenAuthenticated();
+    let provider: string = token.additionalUserInfo.providerId
     this.request = {
       username: this.userForm.value.username,
       email: this.userForm.value.email,
@@ -85,14 +82,14 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  retriveUserProfile(loading){
-    this._usersService.getUserDetail(this.request).subscribe(data=>{
-      if (data && !data.error){
+  retriveUserProfile() {
+    this._usersService.getUserDetail(this.request).subscribe(data => {
+      if (data && !data.error) {
+        this._loadingService.hideLoader();
         this._authService.saveUserPersonalInfo(data);
-        this._loadingService.stopLoading(loading)
-        this.router.navigate(['initial-test']);
-      }else{
-        this._loadingService.stopLoading(loading)
+        this.router.navigate(['/register/initial-test']);
+      } else {
+        this._loadingService.hideLoader();
       }
 
     })

@@ -15,7 +15,8 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this._authService.getTokenAuthenticated();
+    this.user = this._authService.getUserPersonalInfo();
+    console.log(this.user);
   }
 
 }

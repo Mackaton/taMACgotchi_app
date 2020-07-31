@@ -2,6 +2,7 @@ import { of, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators'
 import { HttpHeaders, HttpClient } from '@angular/common/http'
+import { ToastService } from './services/toast.service';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -26,7 +27,8 @@ export class BaseService {
      * @memberof BaseService
      */
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        public _toastService: ToastService,
     ){}
     
     /**
@@ -40,7 +42,8 @@ export class BaseService {
     getBase(endpoint: string):Observable<any>{
         let apiURL =  `${this.API_URL}${endpoint}`
         return this.http.get(apiURL).pipe(
-            catchError(this.handleError('getBase'))
+            catchError(err=>
+                this.handleError<any>(err))
         )
     }
 
@@ -56,7 +59,8 @@ export class BaseService {
     postBase(element: Object, endpoint: string):Observable<any>{
         let apiURL =  `${this.API_URL}${endpoint}`
         return this.http.post(apiURL, element, httpOptions).pipe(
-            catchError(this.handleError<any>('addBase'))
+            catchError(err=>
+                this.handleError<any>(err))
         )
     }
 
@@ -72,7 +76,8 @@ export class BaseService {
     putBase(element: Object, endpoint: string):Observable<any>{
         let apiURL =  `${this.API_URL}${endpoint}`
         return this.http.put(apiURL, element, httpOptions).pipe(
-            catchError(this.handleError<any>('updateBase'))
+            catchError(err=>
+                this.handleError<any>(err))
         )
     }
 
@@ -87,7 +92,8 @@ export class BaseService {
     deleteBase(element: Object, endpoint:string):Observable<any>{
         let apiURL = `${this.API_URL}${endpoint}`
         return this.http.delete(apiURL, httpOptions).pipe(
-            catchError(this.handleError<any>('deleteBase'))
+            catchError(err=>
+                this.handleError<any>(err))
         )
     }
 
@@ -101,9 +107,9 @@ export class BaseService {
      * @returns Observable with error info
      * @memberof BaseService
      */
-    private handleError<T>(operation = 'operation'){
-        return (error_object: any):Observable<T> =>{
-            return of(error_object)
-        }
+    private handleError<T>(err){
+        console.log(err)
+        this._toastService.presentToast(err.error.error);
+        return (err)   
     }
 }

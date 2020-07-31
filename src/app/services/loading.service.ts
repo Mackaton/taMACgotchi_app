@@ -10,31 +10,31 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LoadingService {
 
-    isLogged:any = false;
+  isLogged: any = false;
 
-    constructor(
-        public http: HttpClient,
-        public router: Router,
-        public loadingController: LoadingController,
-    ) {}
+  constructor(
+    public http: HttpClient,
+    public router: Router,
+    public loadingController: LoadingController,
+  ) { }
 
-    async presentLoading(message:string) {
-        return new Promise(async (resolve,reject)=>{
-            const loading = await this.loadingController.create({
-                cssClass: 'my-custom-class',
-                message: message,
-                duration: 2000
-              });
-              loading.present().then(()=>{
-                  resolve(loading)
-              });
-        })
-    }
+  // Show the loader for infinite time
+  showLoader(message: string) {
+    this.loadingController.create({
+      message: message
+    }).then((res) => {
+      res.present();
+    });
+  }
 
-    async stopLoading(loading:any){
-        const { role, data } = await loading.onDidDismiss();
-    }
-    
-    
+  // Hide the loader if already created otherwise return error
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+    }).catch((error) => {
+      console.log('error', error);
+    });
+  }
+
+
 
 }

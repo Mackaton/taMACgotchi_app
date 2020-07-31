@@ -29,14 +29,18 @@ export class StartNewPlantPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this._authService.getUserPersonalInfo().user){
-      this.user = this._authService.getUserPersonalInfo().user;
-    }else if (this._authService.getUserPersonalInfo()){
-      this.user = this._authService.getUserPersonalInfo();
-    }
     this.plantForm = this.formBuilder.group({
-      idUser: new FormControl(this.user._id,Validators.required),
+      idUser: new FormControl('',Validators.required),
       name: new FormControl('',Validators.required),
+    })
+    this.user = this._authService.getUserPersonalInfo();
+    this._usersService.getUserDetail(this.user).subscribe(data=>{
+      this._authService.saveUserPersonalInfo(data);
+      this.user = this._authService.getUserPersonalInfo();
+      this.plantForm = this.formBuilder.group({
+        idUser: new FormControl(this.user._id,Validators.required),
+        name: new FormControl('',Validators.required),
+      })
     })
   }
 
@@ -46,22 +50,19 @@ export class StartNewPlantPage implements OnInit {
 
   createPlant(){
     console.log(this.plantForm.value)
-    this._loadingService.presentLoading('Creando planta').then((loading)=>{
+      this._loadingService.showLoader('Creando planta')
       this._plantsService.createPlant(this.plantForm.value).subscribe(data=>{
         if (data && !data.error){
-          console.log(data);
+          this._loadingService.hideLoader();
           this._usersService.getUserDetail(this.user).subscribe(data=>{
             this._authService.saveUserPersonalInfo(data);
             this.actualPlant = data.urlPicture
-            this._loadingService.stopLoading(loading)
             this.continueToStep(1);
           })
         }else{
-          console.log(data);
-          this._loadingService.stopLoading(loading)
+          this._loadingService.hideLoader();
         }
       })
-    })
   }
 
   goToMain(){

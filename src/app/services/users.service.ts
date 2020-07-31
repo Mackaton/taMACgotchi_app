@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BaseService } from '../app.base.service';
 import { Observable } from 'rxjs';
+import { ToastService } from './toast.service';
 
 
 
@@ -11,8 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class UsersService extends BaseService{
 
-    constructor(http:HttpClient) {
-        super(http)
+    constructor(http:HttpClient,toastService:ToastService,) {
+        super(http,toastService)
     }
 
     createUser(user:any):Observable<any>{
