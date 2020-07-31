@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tasks</ion-title>
+    <ion-title class="text-center text-white">
+      Tareas
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-card class="bg-transparent">
+    <ion-card-header>
+      <!-- <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle> -->
+      <ion-card-title class="color3">Por completar
+      <ion-icon name="document-text-outline"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let entry of tasks" lines="full">
+            <ion-icon slot="end" name="checkmark-circle-outline" class="color3" (click)="setTaskChecked(entry)"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <h2>
+              {{entry.description}}
+            </h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+  </ion-card>
 
 </ion-content>
