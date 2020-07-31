@@ -16,8 +16,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth'; 
 import { environment } from 'src/environments/environment';
 import { LoginPageModule } from './pages/login/login.module';
+import { CanDeactivateGuard } from './services/deactivate.guard.service';
 /*Services*/
-const Services = [AuthGuardService,]
+const Services = [AuthGuardService,CanDeactivateGuard]
 
 
 @NgModule({
