@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { PlantsService } from '../services/plants.service';
-import { LoadingService } from '../services/loading.service';
-import { UsersService } from '../services/users.service';
+import { AuthService } from '../../services/auth.service';
+import { PlantsService } from '../../services/plants.service';
+import { LoadingService } from '../../services/loading.service';
+import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 
 @Component({

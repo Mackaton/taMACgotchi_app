@@ -14,11 +14,10 @@ export class InitialTestPage implements OnInit {
   registerError:string;
   testStep:number = 0;
   testQuestions:any;
-  numberTotalSteps:number;
-  pagesSteps:Array<any> = [];
   questionsArray:FormArray;
   questionForm:FormGroup;
   userProfile:any;
+  optionIndex:any = [];
 
   constructor(
     public router: Router,
@@ -38,36 +37,22 @@ export class InitialTestPage implements OnInit {
     this.testStep = step;
   }
 
-  preparePagesSteps(){
-    for (let i = 0;i<this.testQuestions.length;i=i+2){
-      this.pagesSteps.push({
-        first_question: this.testQuestions[i],
-        second_question: this.testQuestions[i+1]
-      })
-    }
-  }
-
   getQuestions(){
     this._initialTestService.getAllQuestions().subscribe(data=>{
+      console.log(data);
       this.testQuestions = data;
       this.testQuestions.forEach(question => {
         this.questionsArray.push(this.formBuilder.group({
           id_question: new FormControl(question._id),
           value: new FormControl(''),
+          index: new FormControl(''),
         }))
       });
     })
   }
 
   sendTest(){
-    this.questionForm =  this.formBuilder.group({
-      username: new FormControl(this.userProfile.username),
-      results: new FormControl(this.questionsArray.value),
-      date: new FormControl(new Date()),
-    })
-    this.questionForm.value.results.forEach(result => {
-      result.value = Number(result.value)
-    });
+    this.setForm();
     console.log(this.questionForm.value)
     this._loadingService.showLoader('Subiendo test');
     this._initialTestService.createTest(this.questionForm.value).subscribe(data=>{
@@ -84,6 +69,19 @@ export class InitialTestPage implements OnInit {
         this._loadingService.hideLoader();
       }
     })
+  }
+
+  setForm(){
+    this.questionForm =  this.formBuilder.group({
+      username: new FormControl(this.userProfile.username),
+      results: new FormControl(this.questionsArray.value),
+    })
+    this.questionForm.value.results.forEach(result => {
+      let split = result.value.split("&")
+      console.log(split)
+      result.value = Number(split[0])
+      result.index = Number(split[1])
+    });
   }
 
   

@@ -41,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'start-new-plant',
-    loadChildren: () => import('./start-new-plant/start-new-plant.module').then( m => m.StartNewPlantPageModule),
+    loadChildren: () => import('./pages/start-new-plant/start-new-plant.module').then( m => m.StartNewPlantPageModule),
     canActivate: [AuthGuardService] 
 
   },
