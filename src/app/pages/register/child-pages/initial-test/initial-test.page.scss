@@ -1,15 +1,5 @@
-// body {
-//     font-family:sans-serif;
-// }
-
-// #donate {
-//     margin:4px;
-
-//     float:left;
-// }
 
  #donate label {
-     //float:left;
      width:170px;
      margin:4px;
      background-color:#EFEFEF;
@@ -32,8 +22,7 @@
      left:-200px;
      width: 100%;
      height: 50px;
-     //visibility:hidden
-     //padding: 30px;
+
  }
 
  #donate input:checked + span {
@@ -41,26 +30,7 @@
      color:#F7F7F7;
  }
 
-// #donate .yellow {
-//     background-color:#FFCC00;
-//     color:#333;
-// }
-
-// #donate .blue {
-//     background-color:#00BFFF;
-//     color:#333;
-// }
-
-// #donate .pink {
-//     background-color:#FF99FF;
-//     color:#333;
-// }
-
  #donate .green {
      background-color:#A3D900;
      color:#333;
  }
-// #donate .purple {
-//     background-color:#B399FF;
-//     color:#333;
-// }
