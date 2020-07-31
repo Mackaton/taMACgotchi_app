@@ -67,5 +67,9 @@ export class HomePage implements OnInit {
     },4000)
   }
 
+  calculatePercentage(porcentage:number){
+    return porcentage*100/6.5
+  }
+
 
 }
