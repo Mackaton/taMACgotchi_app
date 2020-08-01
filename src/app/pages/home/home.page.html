@@ -1,35 +1,64 @@
 <app-menu></app-menu>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="(user.actualPlant | json) != '{}'">
   <app-shared-header></app-shared-header>
   <div class="d-flex justify-content-end mt-3">
+    <ion-fab vertical="center" horizontal="end" slot="fixed" *ngIf="user.actualPlant.level==3" (click)="freePlant()">
+      <ion-button>
+        Liberar a tu planta
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </ion-button>
+    </ion-fab>
+  
+  
     <div class="d-flex mr-4">
       <img src="../../../assets/leaf.svg" alt="" style="border-radius: 100px; width: 40px;
       position: relative; left: 22px; bottom: 5px;">
       <div class="coal-score text-white justify-content-center d-flex align-items-center p-2"
-      style="background-color:#79A900; border-radius: 20px; width: 80px; height: 30px;">
-        <p class="mb-0">600</p>
+        style="background-color:#79A900; border-radius: 20px; width: 80px; height: 30px;">
+        <p class="mb-0">{{user.taskDone}}</p>
       </div>
     </div>
   </div>
   <div class="d-flex justify-content-center align-items-center flex-column" style="height: 50%;">
-      <img src="{{user.urlPicture}}" class="mt-5" style="width: 70%;" alt="">
-      <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
-        <h3 class="text-white mb-0">{{user.actualPlant.name}}</h3>
-        <img src="../../../assets/one-star.png" class="ml-4" alt="" style="width: 25px;" *ngIf="user.actualPlant.level == 1">
-        <img src="../../../assets/two-stars.svg" class="ml-4" alt="" style="width: 50px;" *ngIf="user.actualPlant.level == 2">
-        <img src="../../../assets/three-stars.svg" class="ml-4" alt="" style="width: 50px;" *ngIf="user.actualPlant.level == 3">
-      </div>
+    <img src="{{user.urlPicture}}" class="mt-5" style="width: 70%;" alt="">
+    <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
+      <h3 class="text-white mb-0">{{user.actualPlant.name}}</h3>
+      <img src="../../../assets/one-star.png" class="ml-4" alt="" style="width: 25px;"
+        *ngIf="user.actualPlant.level == 1">
+      <img src="../../../assets/two-stars.svg" class="ml-4" alt="" style="width: 50px;"
+        *ngIf="user.actualPlant.level == 2">
+      <img src="../../../assets/three-stars.svg" class="ml-4" alt="" style="width: 50px;"
+        *ngIf="user.actualPlant.level == 3">
+    </div>
   </div>
   <div class="mt-5" style="height: 35%;">
-      <div class="d-flex justify-content-center h-75 align-items-center">
-        <img src="../../../assets/feet-co2.png" style="width: 80px; height: 80px; position: relative; z-index: 20;
+    <div class="d-flex justify-content-center h-75 align-items-center">
+      <img src="../../../assets/feet-co2.png" style="width: 80px; height: 80px; position: relative; z-index: 20;
         bottom:10px; left: 60px;" alt="">
-        <div style="width: 60%; height: 45px; border: 5px solid black; border-radius: 20px;"
-        class="mr-5">
-          <div style="width: {{calculatePercentage(user.carbon[user.carbon.length-1].value)}}%; height: 35px; background-color: #5f5858; border-radius: 20px;"
+      <div style="width: 60%; height: 45px; border: 5px solid black; border-radius: 20px;" class="mr-5">
+        <div
+          style="width: {{calculatePercentage(user.carbon[user.carbon.length-1].value)}}%; height: 35px; background-color: #5f5858; border-radius: 20px;"
           class="mr-5"></div>
-        </div>
       </div>
     </div>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="(user.actualPlant | json) == '{}'">
+  <app-shared-header></app-shared-header>
+  <div class="d-flex justify-content-end mt-3">
+
+  <div class="d-flex mr-4">
+    <img src="../../../assets/leaf.svg" alt="" style="border-radius: 100px; width: 40px;
+    position: relative; left: 22px; bottom: 5px;">
+    <div class="coal-score text-white justify-content-center d-flex align-items-center p-2"
+      style="background-color:#79A900; border-radius: 20px; width: 80px; height: 30px;">
+      <p class="mb-0">{{user.taskDone}}</p>
+    </div>
+  </div>
+  </div>
+  <div class="h-100 d-flex justify-content-center align-items-center">
+    <ion-button (click)="goToNewPlant()">Crear una nueva planta</ion-button>
+  </div>
 </ion-content>

@@ -36,4 +36,8 @@ export class PlantsService extends BaseService{
     createPlant(request):Observable<any>{
         return this.postBase(request,`/start/new/plant`)
     }
+
+    freePlant(plant):Observable<any>{
+        return this.putBase({forest: true},`/update/plant/${plant._id}`)
+    }
 }

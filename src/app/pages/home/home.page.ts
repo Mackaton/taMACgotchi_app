@@ -2,6 +2,9 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { WatsonService } from 'src/app/services/watson.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { PlantsService } from 'src/app/services/plants.service';
+import { UsersService } from 'src/app/services/users.service';
+import { Router } from '@angular/router';
 
 declare var window: any;
 @Component({
@@ -14,9 +17,12 @@ export class HomePage implements OnInit {
   user:any;
   public watson:any;
   constructor(
+    public router: Router,
     public _authService:AuthService,
     public _watsonService:WatsonService,
     public _loadingService:LoadingService,
+    public _plantsService:PlantsService,
+    public _usersService:UsersService,
   ) { }
 
   ngOnInit() {
@@ -88,5 +94,18 @@ export class HomePage implements OnInit {
     return porcentage*100/7
   }
 
+  freePlant(){
+    this._plantsService.freePlant(this.user.actualPlant).subscribe(data=>{
+      this._usersService.getUserDetail(this.user).subscribe(data1=>{
+        this._authService.saveUserPersonalInfo(data1);
+        this.user = data1;
+        console.log(this.user)
+      })
+    })
+  }
+
+  goToNewPlant(){
+    this.router.navigate(['/start-new-plant']);
+  }
 
 }
