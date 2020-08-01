@@ -46,7 +46,14 @@ Notas:
 - El build de producción no está implementado
 - El build para iOS en debug y producción no está implementado
 - La conexión con el backend es externa de este repositorio
-- 
+
+#
+Descargar el APK:
+---------
+En el siguiente link esta el APK para descargar e instalar en Android:
+
+[Descargar](https://drive.google.com/file/d/1gKjPmQZMeC6deTR3KMRbupwSJocy9al1/view?usp=sharing)  
+
 #
 Autores:
 ---------
