@@ -3,12 +3,12 @@ Frontend (aplicación móvil) de EcoMACgotchi. Realizado por el equipo 2 (MAC) p
 #
 Versiones:
 ---------
-Ionic CLI: 5.4.16
-Ionic Framework: 5.3.1
-Angular CLI: 9.1.12
-Cordova CLI: 8.1.2
-NodeJS: 13.7.0
-NPM: 6.13.6
+- Ionic CLI: 5.4.16
+- Ionic Framework: 5.3.1
+- Angular CLI: 9.1.12
+- Cordova CLI: 8.1.2
+- NodeJS: 13.7.0
+- NPM: 6.13.6
 #
 Requisitos para ejecutar:
 ---------
