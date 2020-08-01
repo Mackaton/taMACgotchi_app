@@ -12,17 +12,25 @@ import { ToastService } from './toast.service';
 })
 export class TasksService extends BaseService{
 
-    constructor(http:HttpClient,toastService:ToastService,) {
-        super(http,toastService)
+    constructor(http: HttpClient, toastService: ToastService) {
+        super(http, toastService);
     }
 
 
-    getAllTasks():Observable<any>{
+    getAllTasks(): Observable<any>{
         return this.getBase('/tasks/');
     }
 
-    getTaskDetail(task):Observable<any>{
-        return this.getBase(`/tasks/${task.id}`)
+    getTaskDetail(task): Observable<any>{
+        return this.getBase(`/tasks/${task.id}`);
+    }
+
+    getUserTasks(username): Observable<any>{
+        return this.getBase(`/tasks/${username}`);
+    }
+
+    updateTask(taskUpdated, username): Observable<any> {
+        return this.putBase(taskUpdated, `/update/users/tasks/${username}`);
     }
 
 }

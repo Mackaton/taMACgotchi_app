@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -11,6 +12,7 @@ export class MenuComponent implements OnInit {
   userProfile:any;
 
   constructor(
+    public router: Router,
     private _authService:AuthService,
   ) { }
 
@@ -26,6 +28,9 @@ export class MenuComponent implements OnInit {
     this.userProfile = this._authService.getUserPersonalInfo();
   }
 
+  rutador(page){
+        this.router.navigate([`/${page}`]);
+  }
 
 
 }
