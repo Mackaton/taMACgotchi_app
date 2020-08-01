@@ -29,6 +29,10 @@ export class TasksService extends BaseService{
         return this.getBase(`/tasks/${username}`);
     }
 
+    getUserChallenges(username): Observable<any>{
+        return this.getBase(`/challenges/${username}`);
+    }
+
     updateTask(taskUpdated, username): Observable<any> {
         return this.putBase(taskUpdated, `/update/users/tasks/${username}`);
     }

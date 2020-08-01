@@ -12,17 +12,21 @@ import { ToastService } from './toast.service';
 })
 export class MedalsService extends BaseService{
 
-    constructor(http:HttpClient,toastService:ToastService,) {
-        super(http,toastService)
+    constructor(http: HttpClient, toastService: ToastService) {
+        super(http, toastService);
     }
 
 
-    getAllMedals():Observable<any>{
+    getAllMedals(): Observable<any>{
         return this.getBase('/medals/');
     }
 
-    getMedalDetail(medal):Observable<any>{
-        return this.getBase(`/medals/${medal.id}`)
+    getMedalDetail(medal): Observable<any>{
+        return this.getBase(`/medals/${medal.id}`);
+    }
+
+    getUserMedals(username): Observable<any> {
+        return this.getBase(`/medals/user/${username}`);
     }
 
 }

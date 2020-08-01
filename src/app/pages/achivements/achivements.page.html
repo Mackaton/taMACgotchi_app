@@ -6,6 +6,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="card-background-page">
+
+  <div class="bg-transparent">
+    <ion-card *ngFor="let entry of medals">
+      <img src="{{entry.pictureurl}}" width="260px"/>
+      <div class="card-title bgcard">{{entry.name}}</div>
+    </ion-card>
+  </div>
 
 </ion-content>

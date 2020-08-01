@@ -12,6 +12,7 @@ export class TasksPage implements OnInit {
   user: any;
   tasks: any;
   taskUpdated: any;
+  challenges: [];
 
   constructor(
     public _loadingService: LoadingService,
@@ -22,11 +23,18 @@ export class TasksPage implements OnInit {
   ngOnInit() {
     this.user = this._authService.getUserPersonalInfo();
     this.getTasks();
+    this.getChallenges();
   }
 
-  getTasks(){
+  getTasks() {
     this.TaskService.getUserTasks(this.user.username).subscribe(data => {
       this.tasks = data;
+    });
+  }
+
+  getChallenges() {
+    this.TaskService.getUserChallenges(this.user.username).subscribe(data => {
+      this.challenges = data;
     });
   }
 

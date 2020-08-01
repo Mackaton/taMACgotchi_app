@@ -27,7 +27,26 @@
         </ion-item>
       </ion-list>
     </ion-card-content>
+  </ion-card>
 
+  <ion-card *ngIf="challenges" class="bg-transparent">
+    <ion-card-header>
+      <ion-card-title class="color3">Desafios Disponibles
+      <ion-icon name="document-text-outline"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let entry of challenges" lines="full">
+            <h2 slot="end" class="color3">Tier:<span>{{entry.tier}}</span></h2>
+          <ion-label class="ion-text-wrap">
+            <h2>
+              {{entry.description}}
+            </h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 
 </ion-content>
