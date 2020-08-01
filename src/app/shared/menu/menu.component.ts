@@ -28,8 +28,8 @@ export class MenuComponent implements OnInit {
     this.userProfile = this._authService.getUserPersonalInfo();
   }
 
-  rutador(){
-        this.router.navigate(['/tasks']);
+  rutador(page){
+        this.router.navigate([`/${page}`]);
   }
 
 

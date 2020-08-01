@@ -10,7 +10,6 @@
 
   <ion-card class="bg-transparent">
     <ion-card-header>
-      <!-- <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle> -->
       <ion-card-title class="color3">Por completar
       <ion-icon name="document-text-outline"></ion-icon>
       </ion-card-title>
@@ -19,6 +18,7 @@
       <ion-list>
         <ion-item *ngFor="let entry of tasks" lines="full">
             <ion-icon slot="end" name="checkmark-circle-outline" class="color3" (click)="setTaskChecked(entry)"></ion-icon>
+            <ion-icon slot="end" name="sad-outline" class="sad" (click)="setTaskFalse(entry)"></ion-icon>
           <ion-label class="ion-text-wrap">
             <h2>
               {{entry.description}}

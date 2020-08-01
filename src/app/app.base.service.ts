@@ -27,7 +27,7 @@ export class BaseService {
      * @memberof BaseService
      */
     constructor(
-        private http: HttpClient,
+        public http: HttpClient,
         public _toastService: ToastService,
     ){}
     
@@ -56,12 +56,12 @@ export class BaseService {
      * or error if not
      * @memberof BaseService
      */
-    postBase(element: Object, endpoint: string):Observable<any>{
-        let apiURL =  `${this.API_URL}${endpoint}`
+    postBase(element: Object, endpoint: string): Observable<any>{
+        let apiURL =  `${this.API_URL}${endpoint}`;
         return this.http.post(apiURL, element, httpOptions).pipe(
-            catchError(err=>
+            catchError(err =>
                 this.handleError<any>(err))
-        )
+        );
     }
 
     /**
@@ -73,12 +73,12 @@ export class BaseService {
      * or error if not
      * @memberof BaseService
      */
-    putBase(element: Object, endpoint: string):Observable<any>{
-        let apiURL =  `${this.API_URL}${endpoint}`
+    putBase(element: Object, endpoint: string): Observable<any>{
+        const apiURL =  `${this.API_URL}${endpoint}`;
         return this.http.put(apiURL, element, httpOptions).pipe(
-            catchError(err=>
+            catchError(err =>
                 this.handleError<any>(err))
-        )
+        );
     }
 
     /**
