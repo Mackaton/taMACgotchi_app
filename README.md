@@ -55,3 +55,4 @@ Autores:
 - DSegura95 (David Segura) [About me](https://github.com/dsegura95)
 - MaEscalanteHe (Manuel Escalante) [About me](https://github.com/MaEscalanteHe)
 - ArriagaAmin (Amin Arriaga) [About me](https://github.com/ArriagaAmin)
+- Jose Basanta (Jose Basanta) [About me](https://github.com/josedavidb)
