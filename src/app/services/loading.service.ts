@@ -31,7 +31,6 @@ export class LoadingService {
   hideLoader() {
     this.loadingController.dismiss().then((res) => {
     }).catch((error) => {
-      console.log('error', error);
     });
   }
 

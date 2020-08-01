@@ -108,7 +108,6 @@ export class BaseService {
      * @memberof BaseService
      */
     private handleError<T>(err){
-        console.log(err)
         this._toastService.presentToast(err.error.error);
         return (err)   
     }

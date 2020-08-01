@@ -39,7 +39,6 @@ export class InitialTestPage implements OnInit {
 
   getQuestions(){
     this._initialTestService.getAllQuestions().subscribe(data=>{
-      console.log(data);
       this.testQuestions = data;
       this.testQuestions.forEach(question => {
         this.questionsArray.push(this.formBuilder.group({
@@ -53,10 +52,8 @@ export class InitialTestPage implements OnInit {
 
   sendTest(){
     this.setForm();
-    console.log(this.questionForm.value)
     this._loadingService.showLoader('Subiendo test');
     this._initialTestService.createTest(this.questionForm.value).subscribe(data=>{
-      console.log(data);
       if (data){
         if (!data.error){
           this._loadingService.hideLoader();
@@ -78,7 +75,6 @@ export class InitialTestPage implements OnInit {
     })
     this.questionForm.value.results.forEach(result => {
       let split = result.value.split("&")
-      console.log(split)
       result.value = Number(split[0])
       result.index = Number(split[1])
     });

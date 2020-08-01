@@ -40,7 +40,6 @@ export class TasksPage implements OnInit {
 
   setTaskChecked(task) {
     this.taskUpdated = { id_task: task._id, check: true};
-    console.log(this.taskUpdated);
     this._loadingService.showLoader('Actualizando huella de carbono..');
     this.TaskService.updateTask(this.taskUpdated, this.user.username).subscribe(data => {
       this.TaskService.getUserTasks(this.user.username).subscribe(data2 => {

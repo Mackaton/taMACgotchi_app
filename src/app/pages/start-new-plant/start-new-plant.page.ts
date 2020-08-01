@@ -49,13 +49,11 @@ export class StartNewPlantPage implements OnInit {
   }
 
   createPlant(){
-    console.log(this.plantForm.value)
       this._loadingService.showLoader('Creando planta')
       this._plantsService.createPlant(this.plantForm.value).subscribe(data=>{
         if (data && !data.error){
           this._loadingService.hideLoader();
           this._usersService.getUserDetail(this.user).subscribe(data1=>{
-            console.log(data1);
             this._authService.saveUserPersonalInfo(data1);
             this.actualPlant = data1.urlPicture
             this.continueToStep(1);

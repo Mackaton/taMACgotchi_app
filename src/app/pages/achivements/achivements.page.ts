@@ -25,14 +25,11 @@ export class AchivementsPage implements OnInit {
   ngOnInit() {
     this.user = this._authService.getUserPersonalInfo();
     this.getMedals();
-    console.log('hola');
   }
   
   getMedals(){
     this.medalsService.getUserMedals(this.user.username).subscribe(data => {
-      console.log(data);
       this.medals = data;
-      console.log(this.medals);
     });
   }
 

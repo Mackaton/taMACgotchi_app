@@ -44,7 +44,6 @@ export class AppComponent {
         this._loadingService.showLoader('Cargando informacion del usuario')
         this._usersService.getUserDetail(user.user).subscribe((data)=>{
           if (data){
-            console.log(data);
             if (!data.error){
               this._loadingService.hideLoader();
               this._authService.saveUserPersonalInfo(data)

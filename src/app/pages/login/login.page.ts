@@ -52,7 +52,6 @@ export class LoginPage implements OnInit {
 
   getUserProfile(){
     this._usersService.getUserDetail(this.user).subscribe(data=>{
-      console.log(data);
       if (data && !data.error){
         this._authService.saveUserPersonalInfo(data)
         this._authService.setCompletedInitialTest(data.tested)
