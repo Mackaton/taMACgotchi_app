@@ -54,9 +54,10 @@ export class StartNewPlantPage implements OnInit {
       this._plantsService.createPlant(this.plantForm.value).subscribe(data=>{
         if (data && !data.error){
           this._loadingService.hideLoader();
-          this._usersService.getUserDetail(this.user).subscribe(data=>{
-            this._authService.saveUserPersonalInfo(data);
-            this.actualPlant = data.urlPicture
+          this._usersService.getUserDetail(this.user).subscribe(data1=>{
+            console.log(data1);
+            this._authService.saveUserPersonalInfo(data1);
+            this.actualPlant = data1.urlPicture
             this.continueToStep(1);
           })
         }else{
