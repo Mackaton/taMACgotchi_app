@@ -31,5 +31,6 @@ npm-debug.log*
 /www
 .gradle/
 package-lock.json
-/resources/android
-/resources/ios
+/resources/android/
+/resources/ios/
+
