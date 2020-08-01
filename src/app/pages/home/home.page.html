@@ -15,13 +15,13 @@
   <div class="d-flex justify-content-center align-items-center flex-column" style="height: 50%;">
       <img src="{{user.urlPicture}}" class="mt-5" style="width: 70%;" alt="">
       <div class="d-flex justify-content-center align-items-center mt-5">
-        <h1 class="text-white mb-0">{{user.actualPlant.name}}</h1>
+        <h3 class="text-white mb-5">{{user.actualPlant.name}}</h3>
         <img src="../../../assets/one-star.png" class="ml-4" alt="" style="width: 25px;" *ngIf="user.actualPlant.level == 1">
         <img src="../../../assets/two-stars.svg" class="ml-4" alt="" style="width: 50px;" *ngIf="user.actualPlant.level == 2">
         <img src="../../../assets/three-stars.svg" class="ml-4" alt="" style="width: 50px;" *ngIf="user.actualPlant.level == 3">
       </div>
   </div>
-  <div class="" style="height: 40%;">
+  <div class="mt-5" style="height: 35%;">
       <div class="d-flex justify-content-center h-75 align-items-center">
         <img src="../../../assets/feet-co2.png" style="width: 80px; height: 80px; position: relative; z-index: 20;
         bottom:10px; left: 60px;" alt="">
