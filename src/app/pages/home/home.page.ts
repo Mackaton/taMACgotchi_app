@@ -33,7 +33,6 @@ export class HomePage implements OnInit {
     let watson_ngOn
     let user = this.user.username
     var retriveInstance = function(instance){watson_ngOn = instance}
-    console.log(user)
     window.watsonAssistantChatOptions = {
       integrationID: "bbcc33de-33ab-4c46-8dac-49840a25ca71", // The ID of this integration.
       region: "us-south", // The region your integration is hosted in.
@@ -56,8 +55,7 @@ export class HomePage implements OnInit {
     }
 
     var preSendhandler = function(event){
-      console.log(event)
-      console.log('user',user)
+
       // event.data.context.skills['main skill'].user_defined.ismember = true;
       // event.data.context.username = user;
       // event.data.context.skills['main skill'].username = user;
@@ -90,7 +88,6 @@ export class HomePage implements OnInit {
   }
 
   calculatePercentage(porcentage:number){
-    console.log(porcentage)
     return porcentage*100/7
   }
 
@@ -99,7 +96,6 @@ export class HomePage implements OnInit {
       this._usersService.getUserDetail(this.user).subscribe(data1=>{
         this._authService.saveUserPersonalInfo(data1);
         this.user = data1;
-        console.log(this.user)
       })
     })
   }

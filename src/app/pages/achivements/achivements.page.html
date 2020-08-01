@@ -7,12 +7,15 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-
-  <div class="bg-transparent">
+  
+  <div class="bg-transparent" *ngIf="medals?.length > 0">
     <ion-card *ngFor="let entry of medals">
       <img src="{{entry.pictureurl}}" width="260px"/>
       <div class="card-title bgcard">{{entry.name}}</div>
     </ion-card>
   </div>
-
+  <div class="bg-transparent h-100 d-flex justify-content-center align-items-center" *ngIf="medals?.length == 0">
+    <h3 class="text-center text-white">No tienes medallas disponibles</h3>
+  </div>
+  
 </ion-content>

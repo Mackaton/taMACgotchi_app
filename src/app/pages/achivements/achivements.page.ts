@@ -30,6 +30,7 @@ export class AchivementsPage implements OnInit {
   getMedals(){
     this.medalsService.getUserMedals(this.user.username).subscribe(data => {
       this.medals = data;
+      console.log(this.medals)
     });
   }
 

@@ -50,9 +50,8 @@ Notas:
 #
 Autores:
 ---------
-- Jose Basanta
-- Jesus Kauze
-- David Segura
-- Manuel Escalante
-- Amin Arriaga
-
+- ArriagaAmin (Amin Arriaga) [About me](https://github.com/ArriagaAmin)
+- Jkauze (Jesus Kauze) [About me](https://github.com/jkauze)
+- DSegura95 (David Segura) [About me](https://github.com/dsegura95)
+- MaEscalanteHe (Manuel Escalante) [About me](https://github.com/MaEscalanteHe)
+- ArriagaAmin (Amin Arriaga) [About me](https://github.com/ArriagaAmin)
